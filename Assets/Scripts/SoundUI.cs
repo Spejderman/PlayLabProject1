@@ -25,5 +25,6 @@ public class SoundUI : MonoBehaviour
 
         img.color = new Color(img.color.r, img.color.g, img.color.b, input);
         indicator.transform.localScale = new Vector3(defaultSize * input, defaultSize * input, defaultSize * input);
+        input = Camera.main.GetComponent<MicProcessing>().inputLevel * 10;
     }
 }

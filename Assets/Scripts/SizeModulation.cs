@@ -28,5 +28,7 @@ public class SizeModulation : MonoBehaviour
         } else if (Input.GetKey(KeyCode.DownArrow)) {
             size -= Time.deltaTime * speed;
         }
+
+        size = Camera.main.GetComponent<MicProcessing>().inputLevel * 10;
     }
 }
