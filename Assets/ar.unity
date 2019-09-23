@@ -315,8 +315,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd96d8d2cb67e41b4a6f6002f423fd7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  userLatency: 200
   inputLevel: 0
-  debug: 0
+  debug: 1
 --- !u!1 &993993718
 GameObject:
   m_ObjectHideFlags: 0

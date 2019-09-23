@@ -2,6 +2,7 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Linq;
+using UnityEngine.Android;
 
 /// <summary>
 /// Records audio from the default device microphone, adds DSP effects and plays it back – continuously. 
@@ -48,6 +49,18 @@ public class MicProcessing : MonoBehaviour
 
     void Start()
     {
+        if (Permission.HasUserAuthorizedPermission(Permission.Microphone))
+        {
+            // The user authorized use of the microphone.
+        }
+        else
+        {
+            // We do not have permission to use the microphone.
+            // Ask for permission or proceed without the functionality enabled.
+            Permission.RequestUserPermission(Permission.Microphone);
+        }
+
+
         system = FMODUnity.RuntimeManager.CoreSystem;
 
         inputData = new float[100];
