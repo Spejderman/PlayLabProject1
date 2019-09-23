@@ -44,3 +44,14 @@ Assets/Plugins/FMOD/Resources/FMODStudioCache.asset.meta
 Assets/StreamingAssets/**/*.bank
 Assets/StreamingAssets/**/*.bank.meta
 fmod_editor.log
+
+### VisualStudioCode ###
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+### VisualStudioCode Patch ###
+# Ignore all local history of files
+.history
