@@ -17,6 +17,8 @@ public class SoundEmission : MonoBehaviour
     private float distance;
     private DistanceToPlayer dtp;
 
+    public float localTexture;
+
     private Rigidbody rb;
 
 
@@ -44,5 +46,8 @@ public class SoundEmission : MonoBehaviour
         //Updating correct distance + setting local parameter
         distance = dtp.distance;
         eventInstance.setParameterByName("Occlusion", distance);
+
+        //Updating local texture parameter (set from SizeModulation.cs)
+        eventInstance.setParameterByName("Texture", localTexture);
     }
 }
