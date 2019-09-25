@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Chris-AR.unity
+    guid: 3a4ce3bc817662e449eb52a9e5ec7ee8
   m_configObjects: {}
