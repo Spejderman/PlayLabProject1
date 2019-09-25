@@ -47,6 +47,7 @@ public class MicProcessing : MonoBehaviour
     // Debug
     public bool debug;
 
+
     void Start()
     {
         if (Permission.HasUserAuthorizedPermission(Permission.Microphone))
@@ -108,6 +109,10 @@ public class MicProcessing : MonoBehaviour
         FMODCheck(system.recordStart(deviceIndex, sound, true));
     }
 
+
+    /// <summary>
+    /// Update is called every frame
+    /// </summary>
     void Update()
     {
         if (!isPlaying & Time.time > userLatency / 1000)
@@ -117,8 +122,12 @@ public class MicProcessing : MonoBehaviour
         {
             FMODCheck(pitchShift.getMeteringInfo(IntPtr.Zero, out meteringInfo));
             inputLevel = SmoothRms(meteringInfo.rmslevel[0]);
+
+            if (debug)
+                Debug.Log($"The input level is {inputLevel}");
         }
     }
+
 
     /// <summary>
     /// Calculates a running average of RMS values. Window size = 100.
@@ -132,6 +141,7 @@ public class MicProcessing : MonoBehaviour
 
         return inputData.Average();
     }
+
 
     /// <summary>
     /// Starts playback of recorded audio with DSP effects added. 
@@ -160,6 +170,7 @@ public class MicProcessing : MonoBehaviour
 
         channel.isPlaying(out isPlaying);
     }
+
 
     /// <summary>
     /// Checks if the result of a FMOD operation is OK.
