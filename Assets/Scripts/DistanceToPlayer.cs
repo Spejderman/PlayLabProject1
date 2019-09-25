@@ -15,7 +15,7 @@ public class DistanceToPlayer : MonoBehaviour
 
     void Update()
     {
-        distance = Vector3.Distance(other.position, transform.position) / (transform.localScale.x / 2);
+        distance = Vector3.Distance(other.position, transform.position);
         distance = Map(distance, 1, 0, 0, 1);
         distance = distance + 1;
         if (distance <= 0) { distance = 0; }

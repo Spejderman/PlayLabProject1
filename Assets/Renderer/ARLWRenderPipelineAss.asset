@@ -16,7 +16,7 @@ MonoBehaviour:
   m_RendererType: 0
   m_RendererData: {fileID: 11400000, guid: 5f02dd54086663342b61020909633918, type: 2}
   m_RequireDepthTexture: 0
-  m_RequireOpaqueTexture: 0
+  m_RequireOpaqueTexture: 1
   m_OpaqueDownsampling: 1
   m_SupportsHDR: 0
   m_MSAA: 1
