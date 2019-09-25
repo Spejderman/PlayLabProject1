@@ -2,12 +2,34 @@
 using System;
 using System.Runtime.InteropServices;
 using System.Linq;
+using UnityEngine.Android;
 
-
+/// <summary>
+/// Records audio from the default device microphone, adds DSP effects and plays it back – continuously. 
+/// REMEMBER: When using FMOD, Unity Audio should be disabled in project setting.
+/// </summary>
 public class MicProcessing : MonoBehaviour
 {
     private FMOD.System system;
 
+    // Audio configuration
+    private int deviceIndex = 0; // Index 0 will typically be the input device currently active
+    private int sampleRate = 0;
+    private int channels = 0;
+
+    public float userLatency = 200f; // User latency in ms
+    private bool isPlaying;
+
+    // FMOD sound configuration
+    private uint byteCount = 0;
+    private byte[] bytes;
+    private FMOD.Sound sound;
+    private const float soundDuration = 5f; // The length of the recording in seconds
+
+    private FMOD.VECTOR soundPosition;
+    private FMOD.VECTOR soundVelocity;
+
+    // DSP
     FMOD.ChannelGroup channelMaster;
     FMOD.Channel channel;
     FMOD.DSP gate;
@@ -16,30 +38,29 @@ public class MicProcessing : MonoBehaviour
 
     FMOD.REVERB_PROPERTIES reverbProperties;
 
-    private int deviceIndex = 0; // Index 0 will typically be the input device currently active
-    private int sampleRate = 0;
-    private int channels = 0;
-
-    private uint byteCount = 0;
-    private byte[] bytes;
-    private FMOD.Sound sound;
-    private const float soundDuration = 5f; // The length of the recording in seconds
-
-    private float onsetDelay = 0.2f;
-    private bool isPlaying;
-
-    private FMOD.VECTOR soundPosition;
-    private FMOD.VECTOR soundVelocity;
-
+    // Metering
     FMOD.DSP_METERING_INFO meteringInfo;
     private float[] inputData;
     private uint inputDataIndex = 0;
     public float inputLevel;
 
+    // Debug
     public bool debug;
 
     void Start()
     {
+        if (Permission.HasUserAuthorizedPermission(Permission.Microphone))
+        {
+            // The user authorized use of the microphone.
+        }
+        else
+        {
+            // We do not have permission to use the microphone.
+            // Ask for permission or proceed without the functionality enabled.
+            Permission.RequestUserPermission(Permission.Microphone);
+        }
+
+
         system = FMODUnity.RuntimeManager.CoreSystem;
 
         inputData = new float[100];
@@ -55,18 +76,24 @@ public class MicProcessing : MonoBehaviour
 
         if (debug)
         {
-            Debug.Log("Drivers = " + numDrivers + ", Connected = " + numConnected);
-            Debug.Log("Rate = " + sampleRate + ", Channels = " + channels);
+            Debug.Log($"There are {numDrivers} drivers, and {numConnected} are connected:");
+
+            foreach (var device in Microphone.devices)
+                Debug.Log(device);
+
+            Debug.Log($"The selected driver is {Microphone.devices[deviceIndex]}");
+            Debug.Log($"The selected driver has a sample rate of {sampleRate} Hz");
+            Debug.Log($"The selected driver has {channels} channels");
         }
 
-        byteCount = (uint)(soundDuration * 3.0f * (float)(channels * sampleRate)); // 3.0f for the byte size of 24 bit.
+        byteCount = (uint)(soundDuration * 2.0f * (float)(channels * sampleRate)); // 2.0f for the byte size of 16 bit
         bytes = new byte[byteCount];
 
         FMOD.CREATESOUNDEXINFO info = new FMOD.CREATESOUNDEXINFO();
         info.cbsize = Marshal.SizeOf(info);
         info.numchannels = channels;
         info.defaultfrequency = sampleRate;
-        info.format = FMOD.SOUND_FORMAT.PCM24;
+        info.format = FMOD.SOUND_FORMAT.PCM16;
         info.length = byteCount;
 
         reverbProperties = FMOD.PRESET.CONCERTHALL();
@@ -74,12 +101,16 @@ public class MicProcessing : MonoBehaviour
 
         FMODCheck(system.createSound(bytes, FMOD.MODE.LOOP_NORMAL | FMOD.MODE.OPENUSER | FMOD.MODE._3D, ref info, out sound));
 
+        // Start recording
+        if (debug)
+            Debug.Log("Starting recording");
+
         FMODCheck(system.recordStart(deviceIndex, sound, true));
     }
 
     void Update()
     {
-        if (!isPlaying & Time.time > onsetDelay)
+        if (!isPlaying & Time.time > userLatency / 1000)
             FMODInit();
 
         if (isPlaying)
@@ -111,10 +142,15 @@ public class MicProcessing : MonoBehaviour
 
         FMODCheck(system.createDSPByType(FMOD.DSP_TYPE.PITCHSHIFT, out pitchShift));
         pitchShift.setParameterFloat(0, 0.5f); // Set pitch shift
+        pitchShift.setParameterFloat(1, 512f); // Set FFT window size
         pitchShift.setMeteringEnabled(true, true);
 
         FMODCheck(system.createDSPByType(FMOD.DSP_TYPE.LOWPASS_SIMPLE, out lowpass));
         lowpass.setParameterFloat(0, 2000f); // Set lowpass cutoff
+
+        // Start playback
+        if (debug)
+            Debug.Log("Starting playback");
 
         FMODCheck(system.playSound(sound, channelMaster, false, out channel));
         channel.set3DAttributes(ref soundPosition, ref soundVelocity);

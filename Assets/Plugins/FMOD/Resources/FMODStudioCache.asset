@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9134289957792320054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound1/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-8117390625241894904
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,15 +104,32 @@ MonoBehaviour:
   Path: event:/Sound4
   guid: 04d28bdcd5995b4e9e06eddc11629a87
   Banks:
-  - {fileID: 4760401723616292787}
+  - {fileID: 4749844282822474576}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 6449549461336028218}
+  - {fileID: 6058772824032627590}
   MinDistance: 1
   MaxDistance: 5
   Length: 98000
+--- !u!114 &-4557708274595601150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound1/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-3446322269822873988
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +147,23 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 0
+--- !u!114 &-2826057290732612479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound3/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-2520084062450734366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,21 +194,21 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 2991047001115533872}
-  - {fileID: 4760401723616292787}
+  - {fileID: 6963197299608776675}
+  - {fileID: 4749844282822474576}
   EditorEvents:
   - {fileID: -5009129735885266017}
   - {fileID: 8542823714724564306}
   - {fileID: 1656810459447203180}
   - {fileID: 2857880564520530962}
   EditorParameters:
-  - {fileID: 4481451878854130274}
-  - {fileID: 5435653694979695211}
+  - {fileID: 7884573085809436009}
+  - {fileID: 1625859637654306169}
   MasterBanks:
-  - {fileID: 4760401723616292787}
+  - {fileID: 4749844282822474576}
   StringsBanks:
-  - {fileID: 2991047001115533872}
-  stringsBankWriteTime: 637044188693405637
+  - {fileID: 6963197299608776675}
+  stringsBankWriteTime: 637044157080000000
   cacheVersion: 3
 --- !u!114 &166671573502037264
 MonoBehaviour:
@@ -210,6 +261,23 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 0
+--- !u!114 &1625859637654306169
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: ObjectSize
+  m_EditorClassIdentifier: 
+  Name: ObjectSize
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &1656810459447203180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,12 +293,12 @@ MonoBehaviour:
   Path: event:/Sound1
   guid: a2b572646c01f74ea1aa0c6774553815
   Banks:
-  - {fileID: 4760401723616292787}
+  - {fileID: 4749844282822474576}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 440278316602238928}
+  - {fileID: -9134289957792320054}
   MinDistance: 1
   MaxDistance: 5
   Length: 98000
@@ -266,12 +334,12 @@ MonoBehaviour:
   Path: event:/Sound2
   guid: b4cb324aa44a594dbb2c05ff2aafe10c
   Banks:
-  - {fileID: 4760401723616292787}
+  - {fileID: 4749844282822474576}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4792499758137677441}
+  - {fileID: 8158876874382075618}
   MinDistance: 1
   MaxDistance: 5
   Length: 98000
@@ -295,6 +363,57 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 1000
+  Exists: 1
+--- !u!114 &3577101529111034346
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound3/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &4292513355773138899
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound2/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &4300201523171411002
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: ObjectSize
+  m_EditorClassIdentifier: 
+  Name: ObjectSize
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &4481451878854130274
 MonoBehaviour:
@@ -329,6 +448,26 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 0
+  Exists: 1
+--- !u!114 &4749844282822474576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: /Users/RasmusOdgaard/Documents/PlayLabProject1/Assets/FMOD Assets/Mobile/Master.bank
+  SubDir: 
+  lastModified: 637048382370000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 8481856
   Exists: 1
 --- !u!114 &4760401723616292787
 MonoBehaviour:
@@ -406,6 +545,23 @@ MonoBehaviour:
   - Name: 
     Value: 1000
   Exists: 0
+--- !u!114 &5295810248227188901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: Sound2_Distance
+  m_EditorClassIdentifier: 
+  Name: Sound2_Distance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
 --- !u!114 &5306059731071493092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -440,6 +596,60 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &6026436375537191021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound4/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &6052617584930353080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: D:/ITU/playLab-AR/PlayLabProject1/Assets/FMOD Assets/Mobile/Master.strings.bank
+  SubDir: 
+  lastModified: 637044179447834128
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1000
+  Exists: 1
+--- !u!114 &6058772824032627590
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound4/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &6449549461336028218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -456,6 +666,26 @@ MonoBehaviour:
   Min: 0
   Max: 1
   Default: 1
+  Exists: 1
+--- !u!114 &6963197299608776675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: /Users/RasmusOdgaard/Documents/PlayLabProject1/Assets/FMOD Assets/Mobile/Master.strings.bank
+  SubDir: 
+  lastModified: 637044157080000000
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 1000
   Exists: 1
 --- !u!114 &7259620190358169235
 MonoBehaviour:
@@ -474,6 +704,60 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 0
+--- !u!114 &7884573085809436009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: Sound2_Distance
+  m_EditorClassIdentifier: 
+  Name: Sound2_Distance
+  Min: 0
+  Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &7894539151202726611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: D:/ITU/playLab-AR/PlayLabProject1/Assets/FMOD Assets/Mobile/Master.bank
+  SubDir: 
+  lastModified: 637044198393714670
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 8481856
+  Exists: 1
+--- !u!114 &8158876874382075618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Sound2/Occlusion
+  m_EditorClassIdentifier: 
+  Name: Occlusion
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &8475943604222705515
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,12 +790,12 @@ MonoBehaviour:
   Path: event:/Sound3
   guid: 0a9bb7dd402caa4d8443642159f5f3bb
   Banks:
-  - {fileID: 4760401723616292787}
+  - {fileID: 4749844282822474576}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 5099262057385560910}
+  - {fileID: 3577101529111034346}
   MinDistance: 1
   MaxDistance: 5
   Length: 98000

@@ -11,9 +11,13 @@ public class SizeModulation : MonoBehaviour
     FMOD.Studio.System system;
     private string parameterName = "ObjectSize";
 
+    MicProcessing mic;
+
     void Start()
     {
         system = FMODUnity.RuntimeManager.StudioSystem;
+        mic = FindObjectOfType<MicProcessing>();
+        Debug.Assert(mic != null,"Fandt ikke mic");
     }
 
     void Update()
@@ -29,6 +33,6 @@ public class SizeModulation : MonoBehaviour
             size -= Time.deltaTime * speed;
         }
 
-        size = Camera.main.GetComponent<MicProcessing>().inputLevel * 10;
+        size = mic.inputLevel * 10;
     }
 }
