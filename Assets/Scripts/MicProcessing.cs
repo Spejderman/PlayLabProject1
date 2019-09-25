@@ -18,7 +18,6 @@ public class MicProcessing : MonoBehaviour
     private int channels = 0;
 
     public float userLatency = 200f; // User latency in ms
-    private bool isPlaying;
 
     // FMOD sound configuration
     private uint byteCount = 0;
@@ -28,6 +27,9 @@ public class MicProcessing : MonoBehaviour
 
     private FMOD.VECTOR soundPosition;
     private FMOD.VECTOR soundVelocity;
+
+    private bool isInitialized;
+    private bool isPlaying;
 
     // DSP
     FMOD.ChannelGroup channelMaster;
@@ -55,14 +57,17 @@ public class MicProcessing : MonoBehaviour
     void Start()
     {
         // Request permission for microphone use, if it has not already been granted
-#if PLATFORM_ANDROID
+        #if UNITY_ANDROID
         if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
         {
             Permission.RequestUserPermission(Permission.Microphone);
         }
-#endif
-        
+        #endif
+
+        #if UNITY_EDITOR
         Init();
+        isInitialized = true;
+        #endif
     }
 
 
@@ -71,8 +76,17 @@ public class MicProcessing : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (!isPlaying & Time.time > userLatency / 1000)
-            Play();
+        #if UNITY_ANDROID
+        if (Permission.HasUserAuthorizedPermission(Permission.Microphone) && !isInitialized)
+        {
+            Init();
+            isInitialized = true;
+        }
+        #endif
+
+        if (isInitialized)
+            if (!isPlaying & Time.time > userLatency / 1000)
+                Play();
 
         if (isPlaying)
         {
@@ -188,6 +202,6 @@ public class MicProcessing : MonoBehaviour
     private void FMODCheck(FMOD.RESULT result)
     {
         if (result != FMOD.RESULT.OK)
-            Debug.Log("FMOD Error = " + result);
+            Debug.Log("FMOD Error = " + result.ToString());
     }
 }
