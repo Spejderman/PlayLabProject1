@@ -57,12 +57,17 @@ public class MicProcessing : MonoBehaviour
     void Start()
     {
         // Request permission for microphone use, if it has not already been granted
-#if PLATFORM_ANDROID
+        #if UNITY_ANDROID
         if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
         {
             Permission.RequestUserPermission(Permission.Microphone);
         }
-#endif
+        #endif
+
+        #if UNITY_EDITOR
+        Init();
+        isInitialized = true;
+        #endif
     }
 
 
@@ -71,11 +76,13 @@ public class MicProcessing : MonoBehaviour
     /// </summary>
     void Update()
     {
+        #if UNITY_ANDROID
         if (Permission.HasUserAuthorizedPermission(Permission.Microphone) && !isInitialized)
         {
             Init();
             isInitialized = true;
         }
+        #endif
 
         if (isInitialized)
             if (!isPlaying & Time.time > userLatency / 1000)
@@ -97,10 +104,7 @@ public class MicProcessing : MonoBehaviour
     /// </summary>
     private void Init()
     {
-        // system = FMODUnity.RuntimeManager.CoreSystem;
-        system = new FMOD.System();
-        // system.setOutput(FMOD.OUTPUTTYPE.OPENSL);
-        system.init(512, FMOD.INITFLAGS.NORMAL, (IntPtr)FMOD.OUTPUTTYPE.OPENSL);
+        system = FMODUnity.RuntimeManager.CoreSystem;
 
         inputData = new float[100];
 
@@ -198,6 +202,6 @@ public class MicProcessing : MonoBehaviour
     private void FMODCheck(FMOD.RESULT result)
     {
         if (result != FMOD.RESULT.OK)
-            Debug.Log("FMOD Error = " + result);
+            Debug.Log("FMOD Error = " + result.ToString());
     }
 }

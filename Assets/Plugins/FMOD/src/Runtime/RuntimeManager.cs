@@ -194,6 +194,14 @@ namespace FMODUnity
             FMOD.SPEAKERMODE speakerMode = (FMOD.SPEAKERMODE)fmodSettings.GetSpeakerMode(fmodPlatform);
             FMOD.OUTPUTTYPE outputType = FMOD.OUTPUTTYPE.AUTODETECT;
 
+            // FIXME: CUSTOM SETTINGS - Changing output mode on Android
+            #if !UNITY_EDITOR && UNITY_ANDROID
+            if (SystemInfo.operatingSystem.Contains("API-26"))
+                Debug.Log("Trying to switch output type..");
+                outputType = FMOD.OUTPUTTYPE.OPENSL;
+                Debug.Log($"Output type is {outputType.toString()}");
+            #endif
+
             FMOD.ADVANCEDSETTINGS advancedSettings = new FMOD.ADVANCEDSETTINGS();
             advancedSettings.randomSeed = (uint)DateTime.Now.Ticks;
             #if UNITY_EDITOR || UNITY_STANDALONE
