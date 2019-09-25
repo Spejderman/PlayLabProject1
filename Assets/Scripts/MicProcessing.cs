@@ -48,17 +48,48 @@ public class MicProcessing : MonoBehaviour
     public bool debug;
 
 
+    /// <summary>
+    /// Requests permission for microphone use, if not already granted, and starts audio initialization. 
+    /// Called on object creation
+    /// </summary>
     void Start()
     {
-        
         // Request permission for microphone use, if it has not already been granted
-        #if PLATFORM_ANDROID
+#if PLATFORM_ANDROID
         if (!Permission.HasUserAuthorizedPermission(Permission.Microphone))
         {
             Permission.RequestUserPermission(Permission.Microphone);
         }
-        #endif
+#endif
+        
+        Init();
+    }
 
+
+    /// <summary>
+    /// Update is called every frame
+    /// </summary>
+    void Update()
+    {
+        if (!isPlaying & Time.time > userLatency / 1000)
+            Play();
+
+        if (isPlaying)
+        {
+            FMODCheck(pitchShift.getMeteringInfo(out meteringInfo, IntPtr.Zero)); // Retrieve metering info, before the DSP (pitch shift) has processed
+            inputLevel = SmoothRms(meteringInfo.rmslevel[0]);
+
+            if (debug)
+                Debug.Log($"The input level is {inputLevel}");
+        }
+    }
+
+
+    /// <summary>
+    /// Initialize the audio system: Pull driver data and create FMOD sound
+    /// </summary>
+    private void Init()
+    {
         system = FMODUnity.RuntimeManager.CoreSystem;
 
         inputData = new float[100];
@@ -106,44 +137,10 @@ public class MicProcessing : MonoBehaviour
         FMODCheck(system.recordStart(deviceIndex, sound, true));
     }
 
-
-    /// <summary>
-    /// Update is called every frame
-    /// </summary>
-    void Update()
-    {
-        if (!isPlaying & Time.time > userLatency / 1000)
-            FMODInit();
-
-        if (isPlaying)
-        {
-            FMODCheck(pitchShift.getMeteringInfo(IntPtr.Zero, out meteringInfo));
-            inputLevel = SmoothRms(meteringInfo.rmslevel[0]);
-
-            if (debug)
-                Debug.Log($"The input level is {inputLevel}");
-        }
-    }
-
-
-    /// <summary>
-    /// Calculates a running average of RMS values. Window size = 100.
-    /// </summary>
-    /// <param name="value"></param>
-    /// <returns></returns>
-    private float SmoothRms(float value)
-    {
-        inputData[inputDataIndex % 100] = value;
-        inputDataIndex++;
-
-        return inputData.Average();
-    }
-
-
     /// <summary>
     /// Starts playback of recorded audio with DSP effects added. 
     /// </summary>
-    private void FMODInit()
+    private void Play()
     {
         system.getMasterChannelGroup(out channelMaster);
 
@@ -166,6 +163,20 @@ public class MicProcessing : MonoBehaviour
         FMODCheck(channel.addDSP(2, pitchShift));
 
         channel.isPlaying(out isPlaying);
+    }
+
+
+    /// <summary>
+    /// Calculates a running average of RMS values. Window size = 100.
+    /// </summary>
+    /// <param name="value"></param>
+    /// <returns></returns>
+    private float SmoothRms(float value)
+    {
+        inputData[inputDataIndex % 100] = value;
+        inputDataIndex++;
+
+        return inputData.Average();
     }
 
 
