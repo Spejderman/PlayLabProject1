@@ -18,7 +18,6 @@ public class MicProcessing : MonoBehaviour
     private int channels = 0;
 
     public float userLatency = 200f; // User latency in ms
-    private bool isPlaying;
 
     // FMOD sound configuration
     private uint byteCount = 0;
@@ -28,6 +27,9 @@ public class MicProcessing : MonoBehaviour
 
     private FMOD.VECTOR soundPosition;
     private FMOD.VECTOR soundVelocity;
+
+    private bool isInitialized;
+    private bool isPlaying;
 
     // DSP
     FMOD.ChannelGroup channelMaster;
@@ -61,8 +63,6 @@ public class MicProcessing : MonoBehaviour
             Permission.RequestUserPermission(Permission.Microphone);
         }
 #endif
-        
-        Init();
     }
 
 
@@ -71,8 +71,15 @@ public class MicProcessing : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (!isPlaying & Time.time > userLatency / 1000)
-            Play();
+        if (Permission.HasUserAuthorizedPermission(Permission.Microphone) && !isInitialized)
+        {
+            Init();
+            isInitialized = true;
+        }
+
+        if (isInitialized)
+            if (!isPlaying & Time.time > userLatency / 1000)
+                Play();
 
         if (isPlaying)
         {
@@ -90,7 +97,10 @@ public class MicProcessing : MonoBehaviour
     /// </summary>
     private void Init()
     {
-        system = FMODUnity.RuntimeManager.CoreSystem;
+        // system = FMODUnity.RuntimeManager.CoreSystem;
+        system = new FMOD.System();
+        // system.setOutput(FMOD.OUTPUTTYPE.OPENSL);
+        system.init(512, FMOD.INITFLAGS.NORMAL, (IntPtr)FMOD.OUTPUTTYPE.OPENSL);
 
         inputData = new float[100];
 
